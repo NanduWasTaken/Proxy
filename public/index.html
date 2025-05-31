@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Proxy API</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background: linear-gradient(135deg, #1a0033, #3d0066, #6e00aa);
+      color: #d7ccff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      user-select: none;
+    }
+    a {
+      color: #c292ff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: #e5c1ff;
+    }
+    header {
+      padding: 3rem 1rem 2rem;
+      text-align: center;
+      animation: fadeInDown 1s ease forwards;
+      opacity: 0;
+    }
+    header h1 {
+      font-weight: 800;
+      font-size: 3.5rem;
+      background: linear-gradient(90deg, #9a6cff, #cba3ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 0;
+      letter-spacing: -0.05em;
+      text-shadow: 0 0 15px #a67effcc;
+    }
+    main {
+      flex-grow: 1;
+      max-width: 720px;
+      margin: 0 auto 4rem;
+      padding: 0 1rem;
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+      animation-delay: 0.5s;
+    }
+    main p.lead {
+      font-size: 1.3rem;
+      text-align: center;
+      margin-bottom: 2.5rem;
+      color: #b9aaffdd;
+      font-weight: 500;
+    }
+    section {
+      background: rgba(40, 0, 80, 0.85);
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(122, 60, 255, 0.5);
+      padding: 2rem 2.5rem;
+      margin-bottom: 3rem;
+      backdrop-filter: saturate(180%) blur(15px);
+      color: #d7ccff;
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+    }
+    section:nth-of-type(1) {
+      animation-delay: 0.8s;
+    }
+    section:nth-of-type(2) {
+      animation-delay: 1.1s;
+    }
+    section h2 {
+      margin-top: 0;
+      font-weight: 700;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, #cda1ff, #b48aff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 10px #b493ffcc;
+    }
+    pre {
+      position: relative;
+      background: #2e005e;
+      padding: 1.25rem 1.75rem;
+      border-radius: 12px;
+      overflow-x: auto;
+      font-family: 'Source Code Pro', monospace, monospace;
+      font-size: 0.95rem;
+      color: #d6c4ff;
+      line-height: 1.35;
+      margin: 0;
+      box-shadow: 0 4px 30px rgba(122, 60, 255, 0.6);
+      transition: box-shadow 0.3s ease;
+      user-select: all;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    pre:hover {
+      box-shadow: 0 8px 50px rgba(174, 114, 255, 0.9);
+    }
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      background: #a575ff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      color: #2b004a;
+      font-weight: 700;
+      font-size: 0.75rem;
+      cursor: pointer;
+      opacity: 0.85;
+      transition: opacity 0.25s ease;
+      user-select: none;
+    }
+    .copy-btn:hover {
+      opacity: 1;
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+      font-size: 1rem;
+      color: #cdbaffcc;
+      margin: 0;
+    }
+    ul li {
+      padding-left: 1.3em;
+      margin-bottom: 0.7em;
+      position: relative;
+    }
+    ul li::before {
+      content: "✔️";
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-size: 1.1em;
+    }
+    footer {
+      text-align: center;
+      padding: 1.25rem 1rem;
+      font-size: 0.9rem;
+      color: #b4a1ffcc;
+      border-top: 1px solid #8c74e2bb;
+      background: rgba(35, 0, 70, 0.9);
+      backdrop-filter: saturate(180%) blur(12px);
+      user-select: none;
+    }
+    footer a {
+      font-weight: 600;
+      color: #cbaaff;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #e9d4ff;
+    }
+    /* Animations */
+    @keyframes fadeInDown {
+      0% {opacity: 0; transform: translateY(-20px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeInUp {
+      0% {opacity: 0; transform: translateY(20px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+    /* Responsive */
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 2.5rem;
+      }
+      main {
+        margin-bottom: 2rem;
+      }
+      section h2 {
+        font-size: 1.4rem;
+      }
+    }
+    /* Language selector styling */
+    .language-selector {
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: flex-start;
+      gap: 0.6rem;
+      align-items: center;
+      user-select: none;
+    }
+    .language-selector label {
+      font-weight: 600;
+      color: #d1baff;
+      user-select: none;
+    }
+    .language-selector select {
+      background: #5a2fffcc;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 10px;
+      font-weight: 600;
+      color: #f4eaff;
+      cursor: pointer;
+      box-shadow: 0 0 12px #aa85ffcc;
+      transition: background 0.3s ease;
+      user-select: none;
+    }
+    .language-selector select:hover, .language-selector select:focus {
+      background: #7b54ffcc;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Proxy API</h1>
+  </header>
+
+  <main>
+    <p class="lead">A blazing fast, reliable, and CORS-free JSON proxy API with zero hassle.</p>
+
+    <section>
+      <h2>Usage Example</h2>
+
+      <div class="language-selector" aria-label="Select example language">
+        <label for="languageSelect">Example Language:</label>
+        <select id="languageSelect" aria-describedby="languageSelectDesc">
+          <option value="curl">cURL</option>
+          <option value="javascript">JavaScript (fetch)</option>
+          <option value="python">Python (requests)</option>
+          <option value="bash">Bash (httpie)</option>
+        </select>
+      </div>
+
+      <pre id="codeBlock" tabindex="0" aria-live="polite" aria-atomic="true"></pre>
+      <button class="copy-btn" aria-label="Copy example code">Copy</button>
+      
+      <p style="color:#b49cffcc; margin-top: 0.75rem; font-size: 0.95rem;">
+        Supports <code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>PATCH</code>, <code>DELETE</code>. Put your JSON payload inside <code>data</code>.
+      </p>
+    </section>
+
+    <section>
+      <h2>Quick Tips</h2>
+      <ul>
+        <li>No API keys or tokens required</li>
+        <li>100% CORS-safe from any frontend or backend</li>
+        <li>Automatic headers forwarding</li>
+        <li>Works with all HTTP methods</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    &copy; 2025 Proxy API • Created by <a href="https://github.com/nanduwastaken" target="_blank" rel="noopener noreferrer">NanduWasTaken</a>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const examples = {
+        curl: `curl -X POST https://yourdomain.com/api \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "url": "https://api.example.com/data",
+    "data": {
+      "key": "value"
+    }
+  }'`,
+
+        javascript: `fetch("https://yourdomain.com/api", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    url: "https://api.example.com/data",
+    data: { key: "value" }
+  })
+})
+  .then(res => res.json())
+  .then(console.log)
+  .catch(console.error);`,
+
+        python: `import requests
+response = requests.post("https://yourdomain.com/api", json={
+    "url": "https://api.example.com/data",
+    "data": { "key": "value" }
+})
+print(response.json())`,
+
+        bash: `http POST https://yourdomain.com/api url=https://api.example.com/data data:='{"key":"value"}'`
+      };
+
+      const codeBlock = document.getElementById("codeBlock");
+      const languageSelect = document.getElementById("languageSelect");
+      const copyBtn = document.querySelector(".copy-btn");
+
+      function setCode(lang) {
+        codeBlock.textContent = examples[lang] || examples.curl;
+      }
+
+      languageSelect.addEventListener("change", () => {
+        setCode(languageSelect.value);
+      });
+
+      copyBtn.addEventListener("click", () => {
+        navigator.clipboard.writeText(codeBlock.textContent)
+          .then(() => {
+            copyBtn.textContent = "Copied!";
+            setTimeout(() => {
+              copyBtn.textContent = "Copy";
+            }, 1500);
+          })
+          .catch(() => {
+            copyBtn.textContent = "Failed";
+          });
+      });
+
+      // Initialize on load
+      setCode(languageSelect.value);
+    });
+  </script>
+</body>
+</html>
