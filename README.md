@@ -26,7 +26,7 @@ Send any HTTPS request to `/api` with a target URL and optional data.
 ```js
 const axios = require("axios");
 
-axios.post("https://proxy.js.org/api", {
+axios.post("https://proxyapi.soon.it/api", {
   url: "https://jsonplaceholder.typicode.com/posts",
   data: {
     title: "foo",
@@ -46,7 +46,7 @@ axios.post("https://proxy.js.org/api", {
   <summary>🟦 JavaScript (Fetch)</summary>
 
 ```js
-fetch("https://proxy.js.org/api", {
+fetch("https://proxyapi.soon.it/api", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
@@ -71,7 +71,7 @@ fetch("https://proxy.js.org/api", {
 import requests
 
 res = requests.post(
-    "https://proxy.js.org/api",
+    "https://proxyapi.soon.it/api",
     json={
         "url": "https://jsonplaceholder.typicode.com/posts",
         "data": {
@@ -91,7 +91,7 @@ print(res.json())
   <summary>💻 cURL</summary>
 
 ```bash
-curl -X POST 'https://proxy.js.org' \
+curl -X POST 'https://proxyapi.soon.it/api' \
   -H "Content-Type: application/json" \
   -d '{
     "url": "https://jsonplaceholder.typicode.com/posts",
