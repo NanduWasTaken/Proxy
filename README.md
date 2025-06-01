@@ -118,15 +118,15 @@ curl -X POST 'https://legendary-fiesta-x7jq6gpxrvcp6vq-3000.app.github.dev/api' 
 > Works with any HTTPS API!
 
 ---
-
-## ⚠️ Disclaimer
-
-This is a public open proxy and **should not be used to forward sensitive credentials** without additional security layers.
+> [!WARNING]
+> This is a public open proxy and **should not be used to forward sensitive credentials** without additional security layers.
+> This proxy should not be used for any purpose which is deemed not fit by the maintainers(eg: Malicious Use... etc)
 
 ---
 
 ## 👨‍💻 Creator
 
 Made with ❤️ by [@NanduWasTaken](https://github.com/NanduWasTaken)  
+
+> 🔧 Made by developers, for developers.
 > Open-source and free to use forever ✌️
-> 🔧 Made by developers, for developers  
