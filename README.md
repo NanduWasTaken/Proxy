@@ -26,7 +26,7 @@ Send any HTTPS request to `/api` with a target URL and optional data.
 ```js
 const axios = require("axios");
 
-axios.post("https://legendary-fiesta-x7jq6gpxrvcp6vq-3000.app.github.dev/api", {
+axios.post("https://proxy.js.org/api", {
   url: "https://jsonplaceholder.typicode.com/posts",
   data: {
     title: "foo",
@@ -46,7 +46,7 @@ axios.post("https://legendary-fiesta-x7jq6gpxrvcp6vq-3000.app.github.dev/api", {
   <summary>🟦 JavaScript (Fetch)</summary>
 
 ```js
-fetch("https://legendary-fiesta-x7jq6gpxrvcp6vq-3000.app.github.dev/api", {
+fetch("https://proxy.js.org/api", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
@@ -71,7 +71,7 @@ fetch("https://legendary-fiesta-x7jq6gpxrvcp6vq-3000.app.github.dev/api", {
 import requests
 
 res = requests.post(
-    "https://legendary-fiesta-x7jq6gpxrvcp6vq-3000.app.github.dev/api",
+    "https://proxy.js.org/api",
     json={
         "url": "https://jsonplaceholder.typicode.com/posts",
         "data": {
@@ -91,7 +91,7 @@ print(res.json())
   <summary>💻 cURL</summary>
 
 ```bash
-curl -X POST 'https://legendary-fiesta-x7jq6gpxrvcp6vq-3000.app.github.dev/api' \
+curl -X POST 'https://proxy.js.org' \
   -H "Content-Type: application/json" \
   -d '{
     "url": "https://jsonplaceholder.typicode.com/posts",
