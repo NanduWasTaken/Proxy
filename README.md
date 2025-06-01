@@ -1,6 +1,6 @@
 <h1 align="center">Proxy API</h1>
 
-A fast, reliable, and developer-friendly **HTTPS proxy API** designed to bypass CORS restrictions and forward requests with full HTTP method support.
+A fast, reliable, and developer-friendly **HTTPS Proxy API** designed to bypass CORS restrictions and forward requests with full HTTP method support.
 
 
 ---
